@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import brokerReelSrc from "./broker-reel.mp4";
 import delnetFlyerSrc from "./delnet-flyer.pdf";
 import explainerSpheresSrc from "./explainer_spheres.mp4";
 import logoPng from "./logo.png";
-import weddingVideoSrc from "./wedding.mp4";
 import {
   ArrowRight,
   BarChart3,
@@ -48,6 +46,9 @@ const services = [
   },
 ];
 
+const brokerReelEmbedSrc = "https://drive.google.com/file/d/1O60WJhpapq95CeG7PsnvWKnf-PAwbHwC/preview";
+const weddingVideoEmbedSrc = "https://drive.google.com/file/d/17o-96h1iIcCzRzbnkRakJnQWxMs_JZMk/preview";
+
 const reels = [
   {
     title: "DELNET workshop flyer design",
@@ -58,17 +59,17 @@ const reels = [
   },
   {
     title: "Independent broker promo reel",
-    type: "Autoplay Reel",
+    type: "Broker Reel",
     category: "Real Estate / Broker",
-    src: brokerReelSrc,
-    previewType: "video",
+    src: brokerReelEmbedSrc,
+    previewType: "embed",
   },
   {
     title: "Kalamkari animated wedding invitation",
     type: "Animated Invite",
     category: "Event Management",
-    src: weddingVideoSrc,
-    previewType: "video",
+    src: weddingVideoEmbedSrc,
+    previewType: "embed",
   },
 ];
 
@@ -285,6 +286,13 @@ function ReelCard({ item, index, onOpen }) {
             autoPlay
             preload="auto"
           />
+        ) : item.previewType === "embed" ? (
+          <iframe
+            src={item.src}
+            title={item.title}
+            className="pointer-events-none h-full w-full bg-black"
+            allow="autoplay; fullscreen"
+          />
         ) : (
           <iframe
             src={`${item.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
@@ -363,6 +371,13 @@ function PortfolioModal({ item, onClose }) {
             <div className="bg-black">
               {item.previewType === "video" ? (
                 <video src={item.src} className="h-full w-full object-cover" autoPlay muted loop playsInline controls />
+              ) : item.previewType === "embed" ? (
+                <iframe
+                  src={item.src}
+                  title={item.title}
+                  className="h-[70vh] w-full bg-black"
+                  allow="autoplay; fullscreen"
+                />
               ) : (
                 <iframe src={item.src} title={item.title} className="h-[70vh] w-full bg-white" />
               )}
