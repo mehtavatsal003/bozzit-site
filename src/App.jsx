@@ -3,6 +3,9 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import delnetFlyerSrc from "./delnet-flyer.pdf";
 import explainerSpheresSrc from "./explainer_spheres.mp4";
 import logoPng from "./logo.png";
+import brokerCardPoster from "./Screenshot 2026-04-20 001229.png";
+import flyerCardPoster from "./Screenshot 2026-04-20 001148.png";
+import weddingCardPoster from "./Screenshot 2026-04-20 001308.png";
 import {
   ArrowRight,
   BarChart3,
@@ -56,6 +59,7 @@ const reels = [
     category: "Print + Promotional",
     src: delnetFlyerSrc,
     previewType: "document",
+    previewImageSrc: flyerCardPoster,
   },
   {
     title: "Independent broker promo reel",
@@ -63,6 +67,7 @@ const reels = [
     category: "Real Estate / Broker",
     src: brokerReelEmbedSrc,
     previewType: "embed",
+    previewImageSrc: brokerCardPoster,
   },
   {
     title: "Kalamkari animated wedding invitation",
@@ -70,6 +75,7 @@ const reels = [
     category: "Event Management",
     src: weddingVideoEmbedSrc,
     previewType: "embed",
+    previewImageSrc: weddingCardPoster,
   },
 ];
 
@@ -265,6 +271,21 @@ function SectionHeading({ eyebrow, title, desc }) {
   );
 }
 
+function PortfolioPoster({ item }) {
+  return (
+    <div
+      className="relative h-full w-full overflow-hidden bg-[#091c31]"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(4,15,28,0.12), rgba(4,15,28,0.58)), url(${item.previewImageSrc})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_30%)]" />
+    </div>
+  );
+}
+
 function ReelCard({ item, index, onOpen }) {
   return (
     <motion.div
@@ -276,34 +297,11 @@ function ReelCard({ item, index, onOpen }) {
       onClick={() => onOpen(item)}
     >
       <div className="relative h-[420px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#f7f7f7,#e9e9e9)]">
-        {item.previewType === "video" ? (
-          <video
-            src={item.src}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-            muted
-            loop
-            playsInline
-            autoPlay
-            preload="auto"
-          />
-        ) : item.previewType === "embed" ? (
-          <iframe
-            src={item.src}
-            title={item.title}
-            className="pointer-events-none h-full w-full bg-black"
-            allow="autoplay; fullscreen"
-          />
-        ) : (
-          <iframe
-            src={`${item.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-            title={item.title}
-            className="pointer-events-none h-full w-full bg-white"
-          />
-        )}
+        <PortfolioPoster item={item} />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
 
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition duration-300 group-hover:opacity-100">
+        <div className="absolute inset-0 hidden items-center justify-center opacity-0 transition duration-300 group-hover:opacity-100 sm:flex">
           <div className="flex items-center gap-3 rounded-full border border-white/30 bg-white/90 px-4 py-3 text-black shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
             <Play className="h-4 w-4 fill-black text-black" />
             <span className="text-sm font-medium">Preview</span>
@@ -324,7 +322,7 @@ function ReelCard({ item, index, onOpen }) {
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
           <span className="rounded-full bg-black px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white">{item.type}</span>
-          <span className="rounded-full border border-black/10 bg-white/80 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-black/60">
+          <span className="hidden rounded-full border border-black/10 bg-white/80 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-black/60 sm:inline-flex">
             Hover preview
           </span>
         </div>
@@ -474,7 +472,7 @@ function ScrollVideoReveal() {
         style={{ scale, borderRadius: radius, y }}
         className="relative overflow-hidden border border-black/10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
       >
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0f2137] text-white">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#0f2137] text-white sm:aspect-[16/9]">
           <video
             src={explainerSpheresSrc}
             className="h-full w-full object-cover"
@@ -488,13 +486,13 @@ function ScrollVideoReveal() {
           <div className="absolute left-6 top-6 rounded-full bg-black px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-white">
             Motion graphics reel
           </div>
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-6 pb-6 pt-16 text-white md:px-8 md:pb-8">
-            <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.24em] text-white/60">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-5 pb-5 pt-12 text-white sm:px-6 sm:pb-6 sm:pt-16 md:px-8 md:pb-8">
+            <div className="hidden flex-wrap gap-3 text-[11px] uppercase tracking-[0.24em] text-white/60 sm:flex">
               <span>Attention</span>
               <span>Emotion</span>
               <span>Recall</span>
             </div>
-            <div className="mt-3 max-w-3xl text-2xl font-semibold md:text-4xl">
+            <div className="max-w-[250px] text-xl font-semibold leading-tight sm:mt-3 sm:max-w-3xl sm:text-2xl md:text-4xl">
               Good motion makes a brand feel sharper, more confident, and easier to trust in the first few seconds.
             </div>
           </div>
