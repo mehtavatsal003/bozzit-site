@@ -816,11 +816,8 @@ export default function BozzitStudioPremiumSite() {
               </div>
               <div className="flex flex-wrap gap-3">
                 <MagneticButton href="mailto:bozzit.studio@gmail.com">bozzit.studio@gmail.com</MagneticButton>
-                <MagneticButton href="https://wa.me/916354281300" secondary>
-                  WhatsApp: 6354281300
-                </MagneticButton>
-                <MagneticButton href="https://wa.me/919327560857" secondary>
-                  WhatsApp: 9327560857
+                <MagneticButton href="https://wa.me/919898860309" secondary>
+                  WhatsApp: 9898860309
                 </MagneticButton>
               </div>
             </div>
